@@ -1,0 +1,21 @@
+server:
+  port: 8181
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=Asia/Seoul
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    # 로그가 나올 때 어떤 DB에 맞게 나오는지 설정
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true # sql을 줄바꿈해서 깔끔하게 출력
+    database: mysql # DB 계열 설정
+
+logging.level:
+  org.hibernate.SQL: debug
