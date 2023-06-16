@@ -11,7 +11,7 @@ spring:
     # 로그가 나올 때 어떤 DB에 맞게 나오는지 설정
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: mysql # DB 계열 설정
 
 logging.level:
