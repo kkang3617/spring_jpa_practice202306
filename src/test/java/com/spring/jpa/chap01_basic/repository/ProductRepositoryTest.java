@@ -18,7 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
+@Transactional // 데이터베이스의 상태를 변화시키기 위해서 수행하는 작업의 단위
 @Rollback(false) //테이블을 test 이전으로 돌릴지의 여부
 class ProductRepositoryTest {
 
@@ -89,16 +89,17 @@ class ProductRepositoryTest {
         //then
         products.forEach(System.out::println);
 
-        assertEquals(4, products.size());
+        assertEquals(4, products.size()); // 조회결과가 4개여야 한다.
     }
 
     @Test
     @DisplayName("3번 상품을 조회하면 상품명이 '구두'여야 한다.")
     void testFindOne() {
         //given
-        long id = 3L;
+        long id = 3L; // id = 3
         //when
-        Optional<Product> product = productRepository.findById(id);
+        Optional<Product> product = productRepository.findById(id); 
+        //optional 클래스란? null 일수도 있는 객체 를 감싸는 일종의 wrapper클래스
 
         //then
         product.ifPresent( p ->  {
@@ -108,4 +109,33 @@ class ProductRepositoryTest {
         Product foundProduct = product.get(); //3번이 널이 아니여야 통과
         assertNotNull(foundProduct);
     }
+
+    @Test
+    @DisplayName("2번 상품의 이름과 가격을 변경해야 한다.")
+    void testModify() {
+        //given
+        long id = 2L;
+        String newName = "짜장면";
+        int newPrice = 6000;
+
+        //when
+        //jpa에서 update는 따로 메서드를 지원하지 않고
+        //조회를 한 후 setter로 변경하면 자동으로 update문이 나간다.
+        //변경 후 다시 save를 호출하세요.
+        Optional<Product> product = productRepository.findById(id);
+        product.ifPresent(p -> {  // p : 변수선언   product가 존재한다면~~
+            p.setName(newName);
+            p.setPrice(newPrice);
+
+            productRepository.save(p);
+        });
+
+        //then
+        assertTrue(product.isPresent());
+
+        Product p = product.get();
+        assertEquals("짜장면", p.getName()); //업데이트 되서 짜장면을 바뀌었는지 확인
+    }
+
+
 }

@@ -12,9 +12,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true # sql을 줄바꿈해서 깔끔하게 출력
     database: mysql # DB 계열 설정
 
 logging.level:
