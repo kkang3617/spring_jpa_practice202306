@@ -61,13 +61,13 @@ class EmployeeRepositoryTest {
 
     @Test
     @DisplayName("특정 사원의 정보 조회")
-    void testFindOne() {
+    void testFindOne() {  // join을 통해 부서정보를 나타낼 수 있다.
         //given
         long id = 2L; //2번사원
         //when
         Employee employee
                 = employeeRepository.findById(id)
-                .orElseThrow(
+                .orElseThrow(   //null이 왔을 때 처리.
                         () -> new RuntimeException("사원이 없음!")
                 );
         //optional - null방지
