@@ -22,9 +22,30 @@ public class HashTag {
 
     private String tagName; //해시태그 이름
 
-    @ManyToOne(fetch = FetchType.LAZY) // hash n : post 1
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // hash n : post 1
     @JoinColumn(name = "post_no") //조인할 컬럼명
     private Post post;
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
