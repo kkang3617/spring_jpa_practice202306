@@ -37,7 +37,7 @@ public class PostApiController {
     private final PostService postService;
     
     @GetMapping
-    public ResponseEntity<?> list(PageDTO pageDTO) {
+    public ResponseEntity<?> list(PageDTO pageDTO) {  //responseEntitiy 응답에 대한 여러가지 정보를 담을 수 있음.
         log.info("/api/v1/posts?page={}&size={}", pageDTO.getPage(), pageDTO.getSize());
 
         PostListResponseDTO dto = postService.getPosts(pageDTO);

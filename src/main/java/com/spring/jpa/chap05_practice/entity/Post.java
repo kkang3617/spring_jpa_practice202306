@@ -45,7 +45,7 @@ public class Post {
     //양방향 매핑에서 리스트쪽에 데이터를 추가하는 편의메서드 생성
     public void addHashTag(HashTag hashTag) {
         hashTags.add(hashTag);
-        if(this != hashTag.getPost()) {
+        if(this != hashTag.getPost()) { //this : 이 객체.
             hashTag.setPost(this);
         }
     }
